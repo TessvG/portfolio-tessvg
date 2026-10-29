@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Werk — Tess van Gurp</title>
   <meta name="description" content="Projecten en werk van Tess van Gurp. Fysieke prototypes, interactieve installaties en speculatief design.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -38,6 +38,7 @@
       <!-- Categorie Filterknoppen -->
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">Alles tonen</button>
+        <button class="filter-btn" data-filter="campagne-design">Campagne Design</button>
         <button class="filter-btn" data-filter="physical-computing">Physical Computing</button>
         <button class="filter-btn" data-filter="speculative-design">Speculatief Design</button>
         <button class="filter-btn" data-filter="experience-design">Experience Design</button>
@@ -47,7 +48,54 @@
     <!-- PROJECTENLIJST (CONFORM VERSIE 1 & WIREFRAME) -->
     <section class="works-list">
 
-      <!-- ==================== PROJECT 1: ARCADE BOX ==================== -->
+      <!-- ==================== PROJECT 1: EXTRAFAZANT - VEILIG THUIS ==================== -->
+      <article class="work-row" data-category="campagne-design" id="project-veilig-thuis">
+        <div class="work-info-col">
+          <div class="work-badge-group">
+            <span class="work-tag">Campagneconcept</span>
+            <span class="work-tag">Social Design</span>
+            <span class="work-tag">Collectief 5</span>
+          </div>
+          <h2 class="work-title">Niet het hele plaatje — Veilig Thuis</h2>
+          <p class="work-description">
+            Een overkoepelend campagneconcept voor Veilig Thuis (i.s.m. Addsome en Extrafazant) dat het 'niet-pluisgevoel' rondom huiselijk geweld bespreekbaar maakt binnen het basisonderwijs. Met een onvolledige puzzel als centrale metafoor: je hoeft niet alle stukjes te hebben om te merken dat er iets niet klopt.
+          </p>
+          <div class="work-meta-list">
+            <div><strong>Jaar:</strong> 2026</div>
+            <div><strong>Opdrachtgever:</strong> Veilig Thuis (i.s.m. Addsome x Extrafazant)</div>
+            <div><strong>Uitingen:</strong> Campagneposter &amp; video storyboard</div>
+            <div><strong>Kernboodschap:</strong> "Je hoeft niet alles te weten om iets te zeggen."</div>
+          </div>
+          <div class="work-btn-wrap">
+            <button class="pill-btn" data-open-project="veilig-thuis" aria-label="Bekijk werk Veilig Thuis">
+              <span>bekijk werk</span>
+              <span class="btn-arrow-icon">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="work-media-col" data-open-project="veilig-thuis" role="button" tabindex="0" aria-label="Open project Veilig Thuis">
+          <img src="images/extrafazant - veilig thuis/Poster.png" alt="Campagneposter Niet het hele plaatje - Veilig Thuis" loading="lazy">
+          <div class="media-hover-overlay">
+            <span class="overlay-pill">
+              <span>bekijk werk</span>
+              <span class="btn-arrow-icon">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================== PROJECT 2: ARCADE BOX ==================== -->
       <article class="work-row" data-category="physical-computing" id="project-arcade-box">
         <div class="work-info-col">
           <div class="work-badge-group">
@@ -155,9 +203,9 @@
             Een belevingscabine ontworpen om verbindende communicatie te bevorderen tijdens de hectische ploegenoverdracht in ziekenhuizen. Bezoekers ervaren frictie en vertraging via een tastbare houten handdruk, non-verbale emoties op een scherm en een automatische medische printer.
           </p>
           <div class="work-meta-list">
-            <div><strong>Jaar:</strong> 2026</div>
-            <div><strong>Opdrachtgever:</strong> Pieterman</div>
-            <div><strong>Samen met:</strong> Eline Beek &amp; Sem van Dongen</div>
+            <div><strong>Doelgroep:</strong> Ziekenhuisverpleegkundigen na nacht- en dagdiensten</div>
+            <div><strong>Embodiment:</strong> Fysieke handdruk met ziekenhuishandschoen &amp; focus-ruimte</div>
+            <div><strong>Eindresultaat:</strong> Levensgrote privacycabine met gordijn, audio &amp; storyboard</div>
           </div>
           <div class="work-btn-wrap">
             <button class="pill-btn" data-open-project="talk-to-the-hand" aria-label="Bekijk werk Talk to the Hand">
@@ -256,12 +304,13 @@
         </div>
 
         <div class="footer-bottom">
-          <p>© 2026 Tess van Gurp ✦ Communication &amp; Multimedia Design Avans Breda</p>
+          <p>© 2026 Tess van Gurp • Communication &amp; Multimedia Design Avans Breda</p>
+          <p>Ontworpen &amp; gebouwd met zorg ✦</p>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
