@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tess van Gurp — Portfolio</title>
   <meta name="description" content="Portfolio van Tess van Gurp. Interaction designer, creative technologist en student Communication & Multimedia Design in Breda.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -49,10 +49,21 @@
           </span>
         </div>
 
-        <!-- ROTERENDE SLIDES -->
+        <!-- ROTERENDE SLIDES (MAXIMAAL DE 4 MEEST RECENTE PROJECTEN)
+             Tip: Wanneer je in de toekomst een nieuw project toevoegt, plaats je deze als Slide 1 bovenaan.
+             main.js zorgt er automatisch voor dat altijd alleen de 4 meest recente projecten worden getoond en geroteerd. -->
         <div class="showcase-visual-container">
-          <!-- Slide 1: Arcade Box -->
-          <div class="showcase-slide active" data-project-id="arcade-box">
+          <!-- Slide 1: Veilig Thuis -->
+          <div class="showcase-slide active" data-project-id="veilig-thuis">
+            <img class="showcase-img" src="images/extrafazant - veilig thuis/Poster.png" alt="Niet het hele plaatje - Veilig Thuis">
+            <div class="showcase-caption">
+              <h3 class="showcase-project-title">Niet het hele plaatje</h3>
+              <p class="showcase-project-category">Campagneconcept • Veilig Thuis</p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Arcade Box -->
+          <div class="showcase-slide" data-project-id="arcade-box">
             <img class="showcase-img" src="images/images arcade box/outside.jpg" alt="Arcade Box Custom Controller">
             <div class="showcase-caption">
               <h3 class="showcase-project-title">Arcade Box</h3>
@@ -60,7 +71,7 @@
             </div>
           </div>
 
-          <!-- Slide 2: Nature Fights Back -->
+          <!-- Slide 3: Nature Fights Back -->
           <div class="showcase-slide" data-project-id="nature-fights-back">
             <img class="showcase-img" src="images/images nature fights back/Ideaal-eindbeeld-1.png" alt="Nature Fights Back Object">
             <div class="showcase-caption">
@@ -69,7 +80,7 @@
             </div>
           </div>
 
-          <!-- Slide 3: Talk to the Hand -->
+          <!-- Slide 4: Talk to the Hand -->
           <div class="showcase-slide" data-project-id="talk-to-the-hand">
             <img class="showcase-img" src="images/images talk to the hand/DSCF7166.jpg" alt="Talk to the Hand Cabine">
             <div class="showcase-caption">
@@ -81,7 +92,7 @@
 
         <!-- SHOWCASE FOOTER (KNOP BEKIJK WERK MET AFBEELDING 1 STYLING) -->
         <div class="showcase-footer">
-          <button id="showcase-learn-more-btn" class="pill-btn" data-open-project="arcade-box" aria-label="Bekijk werk van dit project">
+          <button id="showcase-learn-more-btn" class="pill-btn" data-open-project="veilig-thuis" aria-label="Bekijk werk van dit project">
             <span>bekijk werk</span>
             <span class="btn-arrow-icon">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -91,8 +102,9 @@
             </span>
           </button>
           <div class="showcase-dots" aria-label="Navigatiestippen voor projecten">
-            <button class="dot-btn active" aria-label="Toon Arcade Box"></button>
-            <button class="dot-btn" aria-label="Toon Nature Fights Back"></button>
+            <button class="dot-btn active" aria-label="Toon Veilig Thuis"></button>
+            <button class="dot-btn" aria-label="Toon Arcade Box"></button>
+            <button class="dot-btn" aria-label="Toon Forma Natura"></button>
             <button class="dot-btn" aria-label="Toon Talk to the Hand"></button>
           </div>
         </div>
@@ -193,12 +205,13 @@
         </div>
 
         <div class="footer-bottom">
-          <p>© 2026 Tess van Gurp ✦ Communication &amp; Multimedia Design Avans Breda</p>
+          <p>© 2026 Tess van Gurp • Communication &amp; Multimedia Design Avans Breda</p>
+          <p>Ontworpen &amp; gebouwd met zorg ✦</p>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
