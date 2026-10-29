@@ -50,7 +50,7 @@ const projectData = {
       },
       {
         type: 'image',
-        src: '/images/extrafazant - veilig thuis/Storyboard-video.jpg',
+        src: 'images/extrafazant - veilig thuis/Storyboard-video.jpg',
         alt: 'Storyboard schets voor de bewustwordingsvideo voor professionals',
         badge: '✦ Storyboard & Video Concept',
         title: 'Signalen Herkennen bij Kinderen',
