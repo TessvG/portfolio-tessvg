@@ -20,6 +20,48 @@ document.addEventListener('DOMContentLoaded', () => {
    en de toelichtende tekst aan de andere kant.
    ========================================================================== */
 const projectData = {
+  'veilig-thuis': {
+    title: 'Niet het hele plaatje — Veilig Thuis',
+    category: 'Campagneconcept & Social Design',
+    stories: [
+      {
+        type: 'image',
+        src: 'images/extrafazant - veilig thuis/WhatsApp Image 2026-10-16 at 10.57.00 AM.jpeg',
+        alt: 'Pitch presentatie Niet het hele plaatje door Tess van Gurp',
+        badge: '✦ Concept & Inzicht',
+        title: 'Het Niet-Pluisgevoel & De Puzzel',
+        paragraphs: [
+          'In opdracht van Veilig Thuis (in samenwerking met Addsome x Extrafazant) ontwierpen we het overkoepelende campagneconcept \'Niet het hele plaatje\'. Zowel professionals op basisscholen als kinderen zelf kunnen merken dat er thuis iets niet klopt, zonder precies te weten wat er speelt.',
+          'Juist die onzekerheid zorgt vaak voor twijfel: mag je wel iets zeggen als je niet het hele verhaal kent? Ons concept laat zien dat een onderbuikgevoel of niet-pluisgevoel al reden genoeg is om het gesprek aan te gaan.'
+        ],
+        quote: '“Je hoeft niet alle stukjes te hebben om te merken dat er iets niet klopt.”'
+      },
+      {
+        type: 'image',
+        src: 'images/extrafazant - veilig thuis/Poster.png',
+        alt: 'Campagneposter Voelt er iets niet goed? Je mag er over praten! - Veilig Thuis',
+        badge: '✦ Campagneposter & Bewustwording',
+        title: 'Voelt er iets niet goed? Je mag er over praten!',
+        paragraphs: [
+          'De campagneposter richt zich op bewustwording binnen de basisschool. Het toont een visuele puzzel met ontbrekende en afwijkende stukjes in warme, toegankelijke kleuren. Door het patroon dat net niet klopt, trekt het direct de aandacht van leerlingen en leerkrachten.',
+          'De poster nodigt kinderen op een laagdrempelige manier uit om over hun gevoelens te praten met iemand die ze vertrouwen, en herinnert professionals eraan dat signalen serieus genomen mogen worden vóórdat het verhaal compleet is.'
+        ],
+        quote: '“Je hoeft niet alles te weten om iets te zeggen.”'
+      },
+      {
+        type: 'image',
+        src: 'images/extrafazant - veilig thuis/Storyboard-video.jpg',
+        alt: 'Storyboard schets voor de bewustwordingsvideo voor professionals',
+        badge: '✦ Storyboard & Video Concept',
+        title: 'Signalen Herkennen bij Kinderen',
+        paragraphs: [
+          'Voor onderwijsprofessionals is een videoverhaal uitgewerkt rondom alledaagse signalen op school: een leerling met een lege broodtrommel, die langzaam inpakt om niet naar huis te hoeven, vaak te laat komt of schrikt van een zachte aanraking op de schouder.',
+          'In het getekende storyboard zie je na ieder opgemerkt signaal een nieuw puzzelstukje verschijnen. Aan het einde ontbreken er nog steeds stukjes, maar de leerkracht besluit toch het gesprek aan te gaan. Want wachten tot het hele plaatje compleet is, kan te laat zijn.'
+        ]
+      }
+    ]
+  },
+
   'arcade-box': {
     title: 'Arcade Box: Custom Game Controller',
     category: 'Physical Computing',
@@ -165,8 +207,11 @@ const projectData = {
   }
 };
 
-// Ondersteun zowel forma-natura als nature-fights-back
+// Ondersteun zowel forma-natura als nature-fights-back en veilig-thuis aliases
 projectData['forma-natura'] = projectData['nature-fights-back'];
+projectData['niet-het-hele-plaatje'] = projectData['veilig-thuis'];
+projectData['extrafazant'] = projectData['veilig-thuis'];
+projectData['veiligthuis'] = projectData['veilig-thuis'];
 
 /* ==========================================================================
    1. TYPEWRITER ANIMATIE (NEDERLANDS)
@@ -223,21 +268,50 @@ function initTypewriter() {
 
 /* ==========================================================================
    2. ROTERENDE PRODUCT SHOWCASE (HOMEPAGE)
+   Toont altijd strikt maximaal de 4 meest recente projecten.
    ========================================================================== */
 function initProductShowcase() {
   const showcaseContainer = document.querySelector('.product-showcase-card');
   if (!showcaseContainer) return;
 
-  const slides = showcaseContainer.querySelectorAll('.showcase-slide');
-  const dots = showcaseContainer.querySelectorAll('.dot-btn');
+  const dotsContainer = showcaseContainer.querySelector('.showcase-dots');
   const learnMoreBtn = showcaseContainer.querySelector('#showcase-learn-more-btn');
 
-  if (!slides.length) return;
+  // Haal alle aanwezige slides op
+  let allSlides = Array.from(showcaseContainer.querySelectorAll('.showcase-slide'));
+  if (!allSlides.length) return;
 
-  const projectIds = ['arcade-box', 'nature-fights-back', 'talk-to-the-hand'];
+  // BEPERKING: Toon altijd maximaal de 4 meest recente projecten op de homepage
+  const MAX_FEATURED_PROJECTS = 4;
+  if (allSlides.length > MAX_FEATURED_PROJECTS) {
+    allSlides.slice(MAX_FEATURED_PROJECTS).forEach(extraSlide => {
+      extraSlide.remove(); // Verwijder overtollige oudere projecten buiten de top 4
+    });
+    allSlides = allSlides.slice(0, MAX_FEATURED_PROJECTS);
+  }
+
+  const slides = allSlides;
   const slideDuration = 7000; // 7s (conform wens 5-10s)
   let currentIndex = 0;
   let intervalId = null;
+
+  // Synchroniseer navigatiestippen dynamisch met de 4 (of minder) projecten
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot-btn' + (i === 0 ? ' active' : '');
+      const projectTitle = slide.querySelector('.showcase-project-title')?.textContent?.trim() || `Project ${i + 1}`;
+      dot.setAttribute('aria-label', `Toon ${projectTitle}`);
+      dot.addEventListener('click', () => {
+        showSlide(i);
+        startRotation();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.dot-btn')) : [];
 
   function showSlide(index) {
     currentIndex = (index + slides.length) % slides.length;
@@ -250,8 +324,12 @@ function initProductShowcase() {
       dot.classList.toggle('active', i === currentIndex);
     });
 
-    if (learnMoreBtn) {
-      learnMoreBtn.setAttribute('data-open-project', projectIds[currentIndex]);
+    if (learnMoreBtn && slides[currentIndex]) {
+      const activeSlide = slides[currentIndex];
+      const pId = activeSlide.getAttribute('data-project-id');
+      if (pId) {
+        learnMoreBtn.setAttribute('data-open-project', pId);
+      }
     }
   }
 
@@ -269,19 +347,12 @@ function initProductShowcase() {
     }
   }
 
-  // Klikbare stippen
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      showSlide(i);
-      startRotation();
-    });
-  });
-
-  // Klikbare slides openen het project in pop-up modal
-  slides.forEach((slide, i) => {
+  // Klikbare slides openen het project direct in pop-up modal
+  slides.forEach((slide) => {
     slide.style.cursor = 'pointer';
     slide.addEventListener('click', () => {
-      openProjectModal(projectIds[i]);
+      const pId = slide.getAttribute('data-project-id');
+      if (pId) openProjectModal(pId);
     });
   });
 
@@ -350,13 +421,54 @@ function initProjectModals() {
     }
   });
 
-  // Luister naar alle knoppen met [data-open-project]
+  // Luister naar alle knoppen en elementen met [data-open-project]
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('[data-open-project]');
     if (trigger) {
       e.preventDefault();
       const projectId = trigger.getAttribute('data-open-project');
       openProjectModal(projectId);
+      return;
+    }
+
+    // Ondersteun ook anker-links met hash naar een project
+    const link = e.target.closest('a[href*="#"]');
+    if (link) {
+      const href = link.getAttribute('href');
+      const hashIndex = href.indexOf('#');
+      if (hashIndex !== -1) {
+        const hashId = href.substring(hashIndex + 1).replace(/^project-/, '');
+        if ((projectData[hashId] || projectData[hashId.toLowerCase()]) && document.getElementById('project-modal')) {
+          const urlPath = href.substring(0, hashIndex);
+          const currentPath = window.location.pathname.split('/').pop();
+          if (!urlPath || urlPath === currentPath) {
+            e.preventDefault();
+            openProjectModal(hashId);
+          }
+        }
+      }
+    }
+  });
+
+  // Ondersteun toetsenbordbediening (Enter / spatie) op klikbare project elementen
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const trigger = e.target.closest('[data-open-project]');
+      if (trigger && trigger.tagName !== 'BUTTON' && trigger.tagName !== 'A') {
+        e.preventDefault();
+        const projectId = trigger.getAttribute('data-open-project');
+        openProjectModal(projectId);
+      }
+    }
+  });
+
+  // Luister naar verandering in URL hash
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash) {
+      const hashId = window.location.hash.replace('#', '').replace(/^project-/, '');
+      if (projectData[hashId]) {
+        openProjectModal(hashId);
+      }
     }
   });
 
@@ -372,6 +484,8 @@ function initProjectModals() {
 }
 
 function openProjectModal(projectId) {
+  if (!projectId) return;
+
   const modalElem = document.getElementById('project-modal');
   if (!modalElem) {
     // Als de modal niet op deze pagina staat, navigeer naar works.html#projectId
@@ -379,7 +493,9 @@ function openProjectModal(projectId) {
     return;
   }
 
-  const project = projectData[projectId];
+  // Ondersteun eventuele prefixen en aliassen
+  let cleanId = projectId.replace(/^project-/, '').trim();
+  const project = projectData[cleanId] || projectData[projectId];
   if (!project) return;
 
   const titleElem = document.getElementById('modal-title');
